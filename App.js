@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, Text, View, YellowBox } from 'react-native';
+import { StyleSheet, Text, View, Button} from 'react-native';
 import firebase from './firebase';
 
 export default function App() {
@@ -70,6 +70,27 @@ export default function App() {
       <Text>item Name : {Object.values(allItems).map(data => data['itemName'])}</Text>
       <Text>the tax percentage is {savedDiscountPercentage}</Text>
       <Text>the discount percentage is {savedTaxPercentage}</Text>
+
+      {/*　showing how to update the value on DB*/}
+      <Button
+        title="change db tax value to 5"
+        onPress={()=>{
+          const newTaxValue = 5;
+          setSavedTaxPercentage(newTaxValue);
+          updateFirestoreData(allItems, savedDiscountPercentage, newTaxValue);
+        }}
+        color="#841584"
+      />
+
+      <Button
+          title="change db tax value to 10"
+          onPress={()=>{
+            const newTaxValue = 10;
+            setSavedTaxPercentage(newTaxValue);
+            updateFirestoreData(allItems, savedDiscountPercentage, newTaxValue);
+          }}
+          color="#841584"
+      />
       <StatusBar style="auto" />
     </View>
   );
