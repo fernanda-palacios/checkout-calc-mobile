@@ -1,30 +1,39 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View, YellowBox } from 'react-native';
-import * as firebase from 'firebase';
-import 'firebase/firestore';
-
-const firebaseConfig = {
-  apiKey: "AIzaSyB6iGj2vKINoTHilVelxZSksX3lzhL51qM",
-  authDomain: "checkoutpricecalculator-28abb.firebaseapp.com",
-  databaseURL: "https://checkoutpricecalculator-28abb.firebaseio.com",
-  projectId: "checkoutpricecalculator-28abb",
-  storageBucket: "checkoutpricecalculator-28abb.appspot.com",
-  messagingSenderId: "912926885493",
-  appId: "1:912926885493:web:c50548a2b071920e149a3c"
-};
-
-if (firebase.app.length === 0){
-  firebase.initializeApp(firebaseConfig);
-}
-
-YellowBox.ignoreWarnings(['Setting a timer for a long period of time']);
-
+import firebase from './firebase';
 
 export default function App() {
+  const [allItems, setAllItems] = useState([]);
+  const [discountPercentage, setDiscountPercentage]  = useState(0);
+  const [taxPercentage, setTaxPercentage] = useState(0);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await firebase.firestore().collection("checkoutCalculator").get().then(
+          function(querySnapShot){
+            const data = {};
+            querySnapShot.forEach(function(doc) {
+              data[doc.id] = doc.data();
+            });
+            const dataId = 1;
+            console.log(data[dataId].items);
+            const a = data[dataId].items;
+            console.log(a);
+            setAllItems(a);
+            setDiscountPercentage(data[dataId].discount_percentage);
+            setTaxPercentage(data[dataId].tax_percentage);
+            console.log(allItems);
+          }
+      );
+    };
+    fetchData();
+  }, []);
+
   return (
     <View style={styles.container}>
-      <Text>Hello World! yeah sounds great! yes! works</Text>
+      <Text>the tax percentage is {taxPercentage}</Text>
+      <Text>the discount percentage is {discountPercentage}</Text>
       <StatusBar style="auto" />
     </View>
   );
