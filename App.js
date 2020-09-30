@@ -17,13 +17,9 @@ export default function App() {
               data[doc.id] = doc.data();
             });
             const dataId = 1;
-            console.log(data[dataId].items);
-            const a = data[dataId].items;
-            console.log(a);
-            setAllItems(a);
+            setAllItems(data[dataId].items);
             setDiscountPercentage(data[dataId].discount_percentage);
             setTaxPercentage(data[dataId].tax_percentage);
-            console.log(allItems);
           }
       );
     };
@@ -32,6 +28,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <Text>item Name : {Object.values(allItems).map(data => data['itemName'])}</Text>
       <Text>the tax percentage is {taxPercentage}</Text>
       <Text>the discount percentage is {discountPercentage}</Text>
       <StatusBar style="auto" />
