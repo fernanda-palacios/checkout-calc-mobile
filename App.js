@@ -72,23 +72,19 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-
-      {/* <Text>Item Name : {Object.values(allItems).map(data => data['itemName'])}</Text> */}
-      <Text>Item Name : {itemNames[0]}</Text>
-      <Text>Price Per Unit : {itemPricesPerUnit[0]}</Text>
-      <Text>Quantity : {itemQuantities[0]}</Text>
-      <br />
-      <Text>Item Name : {itemNames[1]}</Text>
-      <Text>Price Per Unit : {itemPricesPerUnit[1]}</Text>
-      <Text>Quantity : {itemQuantities[1]}</Text>
-
-
-      <br />
+      {allItems.map((item, i) => {
+        return (<View>
+          <Text>Item Name : {itemNames[i]}</Text>
+          <Text>Price Per Unit : {itemPricesPerUnit[i]}</Text>
+          <Text>Quantity : {itemQuantities[i]}</Text>
+          <br />
+        </View>)
+      })}
 
       <Text>the tax percentage is {savedDiscountPercentage}</Text>
       <Text>the discount percentage is {savedTaxPercentage}</Text>
 
-      <br/>
+      <br />
       {/*　showing how to update the value on DB*/}
       <Button
         title="change db tax percentage value to 5"
