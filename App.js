@@ -73,7 +73,7 @@ export default function App() {
 
       {/*　showing how to update the value on DB*/}
       <Button
-        title="change db tax value to 5"
+        title="change db tax percentage value to 5"
         onPress={()=>{
           const newTaxValue = 5;
           setSavedTaxPercentage(newTaxValue);
@@ -83,7 +83,7 @@ export default function App() {
       />
 
       <Button
-          title="change db tax value to 10"
+          title="change db tax percentage value to 10"
           onPress={()=>{
             const newTaxValue = 10;
             setSavedTaxPercentage(newTaxValue);
