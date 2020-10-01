@@ -105,9 +105,9 @@ export default function App() {
         title="Add"
         onPress={() => {
           const itemToAdd = {
-            itemName,
-            pricePerUnit: pricePerUnit, //change to number on submit
-            quantity: quantity, //change to number on submit
+            itemName: itemName,
+            pricePerUnit: pricePerUnit, 
+            quantity: quantity,
           }
 
           const newItems = allItems.slice()
