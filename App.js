@@ -56,7 +56,6 @@ export default function App() {
   }, [savedTaxPercentage, savedDiscountPercentage, allItems]);
 
   const calculateTotal = () => {
-    console.log("calculating total")
     let subtotal = 0;
     allItems.forEach((item) => {
       const itemTotal = item.pricePerUnit * item.quantity;
@@ -66,10 +65,6 @@ export default function App() {
     const tax = subtotal * (savedTaxPercentage / 100);
     const discount = subtotal * (savedDiscountPercentage / 100);
     const total = subtotal + tax - discount;
-    
-    console.log('allItems', allItems)
-    console.log('subtotal', subtotal)
-    console.log('calculated total', total)
 
     setSubtotal(subtotal);
     setTotal(total);
@@ -130,9 +125,9 @@ export default function App() {
           
         </View>)
       })}
-
-      <Text>Currently applied tax percentage:: {savedTaxPercentage} </Text>
-      <Text>Currently applied discount percentage:: {savedDiscountPercentage} </Text>
+      <Text>Subtotal: {subtotal} </Text>
+      <Text>Currently applied tax percentage: {savedTaxPercentage} </Text>
+      <Text>Currently applied discount percentage: {savedDiscountPercentage} </Text>
       <Text>Total: {total} </Text>
       <StatusBar style="auto" />
     </View>
