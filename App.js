@@ -145,6 +145,8 @@ export default function App() {
         }}
         color="#841584"
       />
+
+      <Text>Total: {total} </Text>
       <StatusBar style="auto" />
     </View>
   );
