@@ -50,7 +50,13 @@ export default function App() {
     })
   };
 
+  useEffect(() => {
+    calculateTotal()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [savedTaxPercentage, savedDiscountPercentage, allItems]);
+
   const calculateTotal = () => {
+    console.log("calculating total")
     let subtotal = 0;
     allItems.forEach((item) => {
       const itemTotal = item.pricePerUnit * item.quantity;
@@ -60,6 +66,10 @@ export default function App() {
     const tax = subtotal * (savedTaxPercentage / 100);
     const discount = subtotal * (savedDiscountPercentage / 100);
     const total = subtotal + tax - discount;
+    
+    console.log('allItems', allItems)
+    console.log('subtotal', subtotal)
+    console.log('calculated total', total)
 
     setSubtotal(subtotal);
     setTotal(total);
@@ -121,31 +131,8 @@ export default function App() {
         </View>)
       })}
 
-      <Text>the tax percentage is {savedDiscountPercentage}</Text>
-      <Text>the discount percentage is {savedTaxPercentage}</Text>
-
-      
-      {/*　showing how to update the value on DB*/}
-      <Button
-        title="change db tax percentage value to 5"
-        onPress={() => {
-          const newTaxValue = 5;
-          setSavedTaxPercentage(newTaxValue);
-          updateFirestoreData(allItems, savedDiscountPercentage, newTaxValue);
-        }}
-        color="#841584"
-      />
-
-      <Button
-        title="change db tax percentage value to 10"
-        onPress={() => {
-          const newTaxValue = 10;
-          setSavedTaxPercentage(newTaxValue);
-          updateFirestoreData(allItems, savedDiscountPercentage, newTaxValue);
-        }}
-        color="#841584"
-      />
-
+      <Text>Currently applied tax percentage:: {savedTaxPercentage} </Text>
+      <Text>Currently applied discount percentage:: {savedDiscountPercentage} </Text>
       <Text>Total: {total} </Text>
       <StatusBar style="auto" />
     </View>
