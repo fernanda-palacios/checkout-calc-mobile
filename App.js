@@ -43,8 +43,8 @@ export default function App() {
   const updateFirestoreData = (items, discountPercentage, taxPercentage) => {
     firebase.firestore().collection("checkoutCalculator").doc('1').set({
       items: items,
-      discount_percentage: Number(discountPercentage),
-      tax_percentage: Number(taxPercentage),
+      discount_percentage: discountPercentage,
+      tax_percentage: taxPercentage,
     }).then(function () {
       console.log("data updated successfully");
     })
@@ -56,19 +56,26 @@ export default function App() {
   }, [savedTaxPercentage, savedDiscountPercentage, allItems]);
 
   const calculateTotal = () => {
-    let subtotal = 0;
+    let subtotal = 0
     allItems.forEach((item) => {
-      const itemTotal = item.pricePerUnit * item.quantity;
-      subtotal += itemTotal;
-    });
+      let itemTotal
+      if (isNaN(item.pricePerUnit) || isNaN(item.quantity)) {
+        itemTotal = 0
+      }
+      else {
+        itemTotal = item.pricePerUnit * item.quantity
+      }
+      // const itemTotal = item.pricePerUnit * item.quantity
+      subtotal += itemTotal
+    })
 
-    const tax = subtotal * (savedTaxPercentage / 100);
-    const discount = subtotal * (savedDiscountPercentage / 100);
-    const total = subtotal + tax - discount;
+    const tax = subtotal * (savedTaxPercentage / 100)
+    const discount = subtotal * (savedDiscountPercentage / 100)
+    const total = subtotal + tax - discount
 
-    setSubtotal(subtotal);
-    setTotal(total);
-  };
+    setSubtotal(subtotal)
+    setTotal(total)
+  }
 
   // arrays with all the values for each property of allItems
   const itemNames = Object.values(allItems).map(data => data['itemName'])
@@ -99,8 +106,8 @@ export default function App() {
         onPress={() => {
           const itemToAdd = {
             itemName,
-            pricePerUnit: Number(pricePerUnit), //change to number on submit
-            quantity: Number(quantity), //change to number on submit
+            pricePerUnit: pricePerUnit, //change to number on submit
+            quantity: quantity, //change to number on submit
           }
 
           const newItems = allItems.slice()
@@ -122,7 +129,7 @@ export default function App() {
           <Text>Item Name : {itemNames[i]}</Text>
           <Text>Price Per Unit : {itemPricesPerUnit[i]}</Text>
           <Text>Quantity : {itemQuantities[i]}</Text>
-          
+
         </View>)
       })}
       <Text>Subtotal: {subtotal} </Text>
