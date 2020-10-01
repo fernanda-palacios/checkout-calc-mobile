@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useEffect, useState} from 'react';
-import { StyleSheet, Text, View, Button} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import firebase from './firebase';
 
 export default function App() {
@@ -23,16 +23,16 @@ export default function App() {
   useEffect(() => {
     const fetchData = async () => {
       await firebase.firestore().collection("checkoutCalculator").get().then(
-          function(querySnapShot){
-            const data = {};
-            querySnapShot.forEach(function(doc) {
-              data[doc.id] = doc.data();
-            });
-            const dataId = 1;
-            setAllItems(data[dataId].items);
-            setSavedDiscountPercentage(data[dataId].discount_percentage);
-            setSavedTaxPercentage(data[dataId].tax_percentage);
-          }
+        function (querySnapShot) {
+          const data = {};
+          querySnapShot.forEach(function (doc) {
+            data[doc.id] = doc.data();
+          });
+          const dataId = 1;
+          setAllItems(data[dataId].items);
+          setSavedDiscountPercentage(data[dataId].discount_percentage);
+          setSavedTaxPercentage(data[dataId].tax_percentage);
+        }
       );
     };
     fetchData();
@@ -65,16 +65,34 @@ export default function App() {
     setTotal(total);
   };
 
+  // arrays with all the values for each property of allItems
+  const itemNames = Object.values(allItems).map(data => data['itemName'])
+  const itemPricesPerUnit = Object.values(allItems).map(data => data['pricePerUnit'])
+  const itemQuantities = Object.values(allItems).map(data => data['quantity'])
+
   return (
     <View style={styles.container}>
-      <Text>item Name : {Object.values(allItems).map(data => data['itemName'])}</Text>
+
+      {/* <Text>Item Name : {Object.values(allItems).map(data => data['itemName'])}</Text> */}
+      <Text>Item Name : {itemNames[0]}</Text>
+      <Text>Price Per Unit : {itemPricesPerUnit[0]}</Text>
+      <Text>Quantity : {itemQuantities[0]}</Text>
+      <br />
+      <Text>Item Name : {itemNames[1]}</Text>
+      <Text>Price Per Unit : {itemPricesPerUnit[1]}</Text>
+      <Text>Quantity : {itemQuantities[1]}</Text>
+
+
+      <br />
+
       <Text>the tax percentage is {savedDiscountPercentage}</Text>
       <Text>the discount percentage is {savedTaxPercentage}</Text>
 
+      <br/>
       {/*　showing how to update the value on DB*/}
       <Button
         title="change db tax percentage value to 5"
-        onPress={()=>{
+        onPress={() => {
           const newTaxValue = 5;
           setSavedTaxPercentage(newTaxValue);
           updateFirestoreData(allItems, savedDiscountPercentage, newTaxValue);
@@ -83,13 +101,13 @@ export default function App() {
       />
 
       <Button
-          title="change db tax percentage value to 10"
-          onPress={()=>{
-            const newTaxValue = 10;
-            setSavedTaxPercentage(newTaxValue);
-            updateFirestoreData(allItems, savedDiscountPercentage, newTaxValue);
-          }}
-          color="#841584"
+        title="change db tax percentage value to 10"
+        onPress={() => {
+          const newTaxValue = 10;
+          setSavedTaxPercentage(newTaxValue);
+          updateFirestoreData(allItems, savedDiscountPercentage, newTaxValue);
+        }}
+        color="#841584"
       />
       <StatusBar style="auto" />
     </View>
