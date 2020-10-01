@@ -117,14 +117,14 @@ export default function App() {
           <Text>Item Name : {itemNames[i]}</Text>
           <Text>Price Per Unit : {itemPricesPerUnit[i]}</Text>
           <Text>Quantity : {itemQuantities[i]}</Text>
-          <br />
+          
         </View>)
       })}
 
       <Text>the tax percentage is {savedDiscountPercentage}</Text>
       <Text>the discount percentage is {savedTaxPercentage}</Text>
 
-      <br />
+      
       {/*　showing how to update the value on DB*/}
       <Button
         title="change db tax percentage value to 5"
