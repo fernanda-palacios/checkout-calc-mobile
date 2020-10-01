@@ -39,6 +39,11 @@ export default function App() {
     calculateTotal();
   }, []);
 
+  useEffect(() => {
+    calculateTotal()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [savedTaxPercentage, savedDiscountPercentage, allItems]);
+
   // If data already exists, it updates the values on data. Otherwise, it creates the new data
   const updateFirestoreData = (items, discountPercentage, taxPercentage) => {
     firebase.firestore().collection("checkoutCalculator").doc('1').set({
@@ -49,11 +54,6 @@ export default function App() {
       console.log("data updated successfully");
     })
   };
-
-  useEffect(() => {
-    calculateTotal()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [savedTaxPercentage, savedDiscountPercentage, allItems]);
 
   const calculateTotal = () => {
     let subtotal = 0
