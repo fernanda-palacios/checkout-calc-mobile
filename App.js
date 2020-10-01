@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import firebase from './firebase';
 
 export default function App() {
@@ -72,8 +72,48 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <Text>Add Item</Text>
+      <Text>Item Name:</Text>
+      <TextInput
+        style={{ height: 20, borderColor: 'gray', borderWidth: 1 }}
+        onChange={(e) => setItemName(e.target.value)} value={itemName}
+      />
+
+      <Text>Price Per Unit:</Text>
+      <TextInput
+        style={{ height: 20, borderColor: 'gray', borderWidth: 1 }}
+        onChange={(e) => setPricePerUnit(e.target.value)} value={pricePerUnit} />
+
+      <Text>Quantity:</Text>
+      <TextInput
+        style={{ height: 20, borderColor: 'gray', borderWidth: 1 }}
+        onChange={(e) => setQuantity(e.target.value)} value={quantity} />
+
+      <Button
+        title="Add"
+        onPress={() => {
+          const itemToAdd = {
+            itemName,
+            pricePerUnit: Number(pricePerUnit), //change to number on submit
+            quantity: Number(quantity), //change to number on submit
+          }
+
+          const newItems = allItems.slice()
+          newItems.push(itemToAdd)
+          setAllItems(newItems) // updating this value in state will call calculateTotal bc of useEffect
+
+          // save to db - only change items, rest should remain the same
+          updateFirestoreData(newItems, savedDiscountPercentage, savedTaxPercentage);
+
+          setItemName('')
+          setPricePerUnit('')
+          setQuantity('')
+        }}
+      />
+
+      <Text>All Items</Text>
       {allItems.map((item, i) => {
-        return (<View>
+        return (<View key={i}>
           <Text>Item Name : {itemNames[i]}</Text>
           <Text>Price Per Unit : {itemPricesPerUnit[i]}</Text>
           <Text>Quantity : {itemQuantities[i]}</Text>
