@@ -123,7 +123,7 @@ export default function App() {
         }}
       />
 
-      <View style={{ height: 20 }}></View>
+      <View style={{ height: 10 }}></View>
       <Text style={{ fontWeight: 'bold' }}>Apply Tax Percentage: </Text>
       <TextInput
         style={{ height: 20, borderColor: 'gray', borderWidth: 1 }}
@@ -143,7 +143,7 @@ export default function App() {
         }}
       />
 
-      <View style={{ height: 20 }}></View>
+      <View style={{ height: 10 }}></View>
       <Text style={{ fontWeight: 'bold' }}>Apply Discount Percentage: </Text>
       <TextInput
         style={{ height: 20, borderColor: 'gray', borderWidth: 1 }}
@@ -163,20 +163,44 @@ export default function App() {
         }}
       />
 
-      <View style={{ height: 20 }}></View>
+      <View style={{ height:10 }}></View>
       <Text style={{ fontWeight: 'bold' }}>All Items</Text>
       {allItems.map((item, i) => {
         return (<View key={i}>
           <Text>Item Name : {itemNames[i]}</Text>
           <Text>Price Per Unit : {itemPricesPerUnit[i]}</Text>
           <Text>Quantity : {itemQuantities[i]}</Text>
-
+          <Button
+            title="remove"
+            onPress={() => {
+              const itemToRemove = JSON.parse(JSON.stringify(item)) // deep copy 
+              const newItems = allItems.filter((currentItem) => {
+                // if all values are the same - don't want this item
+                // this would delete all items with all similar values
+                // ideally would use id's but using this check for simplification
+                if (currentItem.itemName === itemToRemove.itemName
+                  && currentItem.quantity === itemToRemove.quantity
+                  && currentItem.pricePerUnit === itemToRemove.pricePerUnit) {
+                  return false
+                }
+                return true
+              })
+              setAllItems(newItems) // updating this value in state will call calculateTotal bc of useEffect
+              // save to db - only change items, rest should remain the same
+              updateFirestoreData(newItems, savedDiscountPercentage, savedTaxPercentage);
+            }}
+          >
+            Remove
+                    </Button>
         </View>)
       })}
+
+      <View style={{ height: 10 }}></View>
+
       <Text>Subtotal: {subtotal} </Text>
       <Text>Currently applied tax percentage: {savedTaxPercentage} </Text>
       <Text>Currently applied discount percentage: {savedDiscountPercentage} </Text>
-      <Text>Total: {total} </Text>
+      <Text style={{ fontWeight: 'bold' }}>Total: {total} </Text>
       <StatusBar style="auto" />
     </View>
   );
