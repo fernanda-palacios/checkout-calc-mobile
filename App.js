@@ -47,7 +47,7 @@ export default function App() {
   // If data already exists, it updates the values on data. Otherwise, it creates the new data
   const updateFirestoreData = (items, discountPercentage, taxPercentage) => {
     firebase.firestore().collection("checkoutCalculator").doc('1').set({
-      items: items || {},
+      items: items || [],
       discount_percentage: discountPercentage || 0,
       tax_percentage: taxPercentage || 0,
     }).then(function () {
