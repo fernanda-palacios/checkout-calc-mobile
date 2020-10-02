@@ -106,7 +106,7 @@ export default function App() {
         onPress={() => {
           const itemToAdd = {
             itemName: itemName,
-            pricePerUnit: pricePerUnit, 
+            pricePerUnit: pricePerUnit,
             quantity: quantity,
           }
 
@@ -122,6 +122,25 @@ export default function App() {
           setQuantity('')
         }}
       />
+      <Text>Apply Tax: </Text>
+      <TextInput
+        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+        onChange={(e) => setNewTaxPercentage(e.target.value)} value={newTaxPercentage} />
+
+      <Button
+        title="Apply tax value"
+        onPress={() => {
+          // const newTaxValue = 10;
+          // setSavedTaxPercentage(newTaxValue);
+          // updateFirestoreData(allItems, savedDiscountPercentage, newTaxValue);
+          setSavedTaxPercentage(newTaxPercentage) // updating this value in state will call calculateTotal bc of useEffect
+          // save to db - only change tax, rest should remain the same
+          updateFirestoreData(allItems, savedDiscountPercentage, newTaxPercentage);
+          // reset input value
+          setNewTaxPercentage('')
+        }}
+      />
+
 
       <Text>All Items</Text>
       {allItems.map((item, i) => {
