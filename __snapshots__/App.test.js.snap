@@ -179,7 +179,7 @@ exports[`<App /> renders correctly 1`] = `
           ]
         }
       >
-        Apply
+        Apply 
       </Text>
     </View>
   </View>

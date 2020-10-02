@@ -47,14 +47,14 @@ export default function App() {
   // If data already exists, it updates the values on data. Otherwise, it creates the new data
   const updateFirestoreData = (items, discountPercentage, taxPercentage) => {
     firebase.firestore().collection("checkoutCalculator").doc('1').set({
-      items: items,
-      discount_percentage: discountPercentage,
-      tax_percentage: taxPercentage,
+      items: items || [],
+      discount_percentage: discountPercentage || 0,
+      tax_percentage: taxPercentage || 0,
     }).then(function () {
       console.log("data updated successfully");
     }).catch((error) => {
       alert(error)
-  });
+    });
   };
 
   const calculateTotal = () => {
@@ -132,7 +132,7 @@ export default function App() {
         onChange={(e) => setNewTaxPercentage(e.target.value)} value={newTaxPercentage} />
 
       <Button
-        title="Apply"
+        title={`Apply ${newTaxPercentage}`}
         onPress={() => {
           // const newTaxValue = 10;
           // setSavedTaxPercentage(newTaxValue);
@@ -165,7 +165,7 @@ export default function App() {
         }}
       />
 
-      <View style={{ height:10 }}></View>
+      <View style={{ height: 10 }}></View>
       <Text style={{ fontWeight: 'bold' }}>All Items</Text>
       {allItems.map((item, i) => {
         return (<View key={i}>
