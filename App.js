@@ -52,7 +52,9 @@ export default function App() {
       tax_percentage: taxPercentage,
     }).then(function () {
       console.log("data updated successfully");
-    })
+    }).catch((error) => {
+      alert(error)
+  });
   };
 
   const calculateTotal = () => {
