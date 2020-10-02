@@ -122,13 +122,15 @@ export default function App() {
           setQuantity('')
         }}
       />
+
+      <View style={{height: 20}}></View>
       <Text>Apply Tax: </Text>
       <TextInput
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+        style={{ height: 20, borderColor: 'gray', borderWidth: 1 }}
         onChange={(e) => setNewTaxPercentage(e.target.value)} value={newTaxPercentage} />
 
       <Button
-        title="Apply tax value"
+        title="Apply"
         onPress={() => {
           // const newTaxValue = 10;
           // setSavedTaxPercentage(newTaxValue);
@@ -141,7 +143,7 @@ export default function App() {
         }}
       />
 
-
+      <View style={{height: 20}}></View>
       <Text>All Items</Text>
       {allItems.map((item, i) => {
         return (<View key={i}>
