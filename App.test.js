@@ -12,5 +12,11 @@ describe('<App />', () => {
   it('renders correctly', () => {
     const tree = renderer.create(<App />).toJSON();
     expect(tree).toMatchSnapshot();
-});
+  });
+
+  it('renders App as View component', () => {
+    const tree = renderer.create(<App />).toJSON();
+    expect(tree.type).toBe('View');
+  });
+
 });
