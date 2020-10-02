@@ -84,7 +84,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>Add Item</Text>
+      <Text style={{ fontWeight: 'bold' }}>Add Item</Text>
       <Text>Item Name:</Text>
       <TextInput
         style={{ height: 20, borderColor: 'gray', borderWidth: 1 }}
@@ -106,7 +106,7 @@ export default function App() {
         onPress={() => {
           const itemToAdd = {
             itemName: itemName,
-            pricePerUnit: pricePerUnit, 
+            pricePerUnit: pricePerUnit,
             quantity: quantity,
           }
 
@@ -123,7 +123,48 @@ export default function App() {
         }}
       />
 
-      <Text>All Items</Text>
+      <View style={{ height: 20 }}></View>
+      <Text style={{ fontWeight: 'bold' }}>Apply Tax Percentage: </Text>
+      <TextInput
+        style={{ height: 20, borderColor: 'gray', borderWidth: 1 }}
+        onChange={(e) => setNewTaxPercentage(e.target.value)} value={newTaxPercentage} />
+
+      <Button
+        title="Apply"
+        onPress={() => {
+          // const newTaxValue = 10;
+          // setSavedTaxPercentage(newTaxValue);
+          // updateFirestoreData(allItems, savedDiscountPercentage, newTaxValue);
+          setSavedTaxPercentage(newTaxPercentage) // updating this value in state will call calculateTotal bc of useEffect
+          // save to db - only change tax, rest should remain the same
+          updateFirestoreData(allItems, savedDiscountPercentage, newTaxPercentage);
+          // reset input value
+          setNewTaxPercentage('')
+        }}
+      />
+
+      <View style={{ height: 20 }}></View>
+      <Text style={{ fontWeight: 'bold' }}>Apply Discount Percentage: </Text>
+      <TextInput
+        style={{ height: 20, borderColor: 'gray', borderWidth: 1 }}
+        onChange={(e) => setNewDiscountPercentage(e.target.value)} value={newDiscountPercentage} />
+
+      <Button
+        title="Apply"
+        onPress={() => {
+          // const newTaxValue = 10;
+          // setSavedTaxPercentage(newTaxValue);
+          // updateFirestoreData(allItems, savedDiscountPercentage, newTaxValue);
+          setSavedDiscountPercentage(newDiscountPercentage)// updating this value in state will call calculateTotal bc of useEffect 
+          // save to db - only change discount, rest should remain the same
+          updateFirestoreData(allItems, newDiscountPercentage, savedTaxPercentage);
+          // reset input value 
+          setNewDiscountPercentage('')
+        }}
+      />
+
+      <View style={{ height: 20 }}></View>
+      <Text style={{ fontWeight: 'bold' }}>All Items</Text>
       {allItems.map((item, i) => {
         return (<View key={i}>
           <Text>Item Name : {itemNames[i]}</Text>
