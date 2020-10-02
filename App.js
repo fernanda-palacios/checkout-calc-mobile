@@ -132,7 +132,7 @@ export default function App() {
         onChange={(e) => setNewTaxPercentage(e.target.value)} value={newTaxPercentage} />
 
       <Button
-        title="Apply"
+        title={`Apply ${newTaxPercentage}`}
         onPress={() => {
           // const newTaxValue = 10;
           // setSavedTaxPercentage(newTaxValue);
