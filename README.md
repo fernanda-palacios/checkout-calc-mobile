@@ -14,7 +14,9 @@ Please clone the project and do folloing commands to run repository locally.
 # 1. install expo cli for react native tools.
 npm install --global expo-cli
 
-# 2. install dependencies and packages.
+# 2.  use node version 12. install dependencies and packages.
+nvm use 12
+
 npm i
 
 # 3. run repo locally
