@@ -1,13 +1,22 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import firebase from './firebase';
+
 
 import App from './App';
 
 describe('<App />', () => {
-  it('has 1 child', () => {
-    // const tree = renderer.create(<App />).toJSON();
-    // expect(tree.children.length).toBe(1);
-    expect(true).toEqual(true)
 
-});
+  firebase.firestore = jest.fn()
+
+  it('renders correctly', () => {
+    const tree = renderer.create(<App />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('renders App as View component', () => {
+    const tree = renderer.create(<App />).toJSON();
+    expect(tree.type).toBe('View');
+  });
+
 });
