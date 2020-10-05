@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
 import firebase from './firebase';
 
 export default function App() {
@@ -85,127 +85,119 @@ export default function App() {
   const itemQuantities = Object.values(allItems).map(data => data['quantity'])
 
   return (
-    <View style={styles.container}>
-      <Text style={{ fontWeight: 'bold' }}>Add Item</Text>
-      <Text>Item Name:</Text>
-      <TextInput
-        style={{ height: 20, borderColor: 'gray', borderWidth: 1 }}
-        onChange={(e) => setItemName(e.nativeEvent.text)} value={itemName}
-      />
+    <ScrollView>
+      <View style={styles.container}>
+        <Text style={{ fontWeight: 'bold' }}>Add Item</Text>
+        <Text>Item Name:</Text>
+        <TextInput
+            style={styles.inputBox}
+            onChange={(e) => setItemName(e.nativeEvent.text)} value={itemName}
+        />
 
-      <Text>Price Per Unit:</Text>
-      <TextInput
-        style={{ height: 20, borderColor: 'gray', borderWidth: 1 }}
-        onChange={(e) => setPricePerUnit(e.nativeEvent.text)} value={pricePerUnit} />
+        <Text>Price Per Unit:</Text>
+        <TextInput
+            style={styles.inputBox}
+            onChange={(e) => setPricePerUnit(e.nativeEvent.text)} value={pricePerUnit} />
 
-      <Text>Quantity:</Text>
-      <TextInput
-        style={{ height: 20, borderColor: 'gray', borderWidth: 1 }}
-        onChange={(e) => setQuantity(e.nativeEvent.text)} value={quantity} />
+        <Text>Quantity:</Text>
+        <TextInput
+            style={styles.inputBox}
+            onChange={(e) => setQuantity(e.nativeEvent.text)} value={quantity} />
 
-      <Button
-        title="Add"
-        onPress={() => {
-          const itemToAdd = {
-            itemName: itemName,
-            pricePerUnit: pricePerUnit,
-            quantity: quantity,
-          }
-
-          const newItems = allItems.slice()
-          newItems.push(itemToAdd)
-          setAllItems(newItems) // updating this value in state will call calculateTotal bc of useEffect
-
-          // save to db - only change items, rest should remain the same
-          updateFirestoreData(newItems, savedDiscountPercentage, savedTaxPercentage);
-
-          setItemName('')
-          setPricePerUnit('')
-          setQuantity('')
-        }}
-      />
-
-      <View style={{ height: 10 }}></View>
-      <Text style={{ fontWeight: 'bold' }}>Apply Tax Percentage: </Text>
-      <TextInput
-        style={{ height: 20, borderColor: 'gray', borderWidth: 1 }}
-        onChange={(e) => setNewTaxPercentage(e.nativeEvent.text)} value={newTaxPercentage} />
-
-      <Button
-        title="Apply"
-        onPress={() => {
-          // const newTaxValue = 10;
-          // setSavedTaxPercentage(newTaxValue);
-          // updateFirestoreData(allItems, savedDiscountPercentage, newTaxValue);
-          setSavedTaxPercentage(newTaxPercentage) // updating this value in state will call calculateTotal bc of useEffect
-          // save to db - only change tax, rest should remain the same
-          updateFirestoreData(allItems, savedDiscountPercentage, newTaxPercentage);
-          // reset input value
-          setNewTaxPercentage('')
-        }}
-      />
-
-      <View style={{ height: 10 }}></View>
-      <Text style={{ fontWeight: 'bold' }}>Apply Discount Percentage: </Text>
-      <TextInput
-        style={{ height: 20, borderColor: 'gray', borderWidth: 1 }}
-        // onChange={(e) => setNewDiscountPercentage(e.target.value)} value={newDiscountPercentage}
-        onChange={(e) => setNewDiscountPercentage(e.nativeEvent.text)} value={newDiscountPercentage}
-      />
-      <Button
-        title="Apply"
-        onPress={() => {
-          // const newTaxValue = 10;
-          // setSavedTaxPercentage(newTaxValue);
-          // updateFirestoreData(allItems, savedDiscountPercentage, newTaxValue);
-          setSavedDiscountPercentage(newDiscountPercentage)// updating this value in state will call calculateTotal bc of useEffect
-          // save to db - only change discount, rest should remain the same
-          updateFirestoreData(allItems, newDiscountPercentage, savedTaxPercentage);
-          // reset input value
-          setNewDiscountPercentage('')
-        }}
-      />
-
-      <View style={{ height:10 }}></View>
-      <Text style={{ fontWeight: 'bold' }}>All Items</Text>
-      {allItems.map((item, i) => {
-        return (<View key={i}>
-          <Text>Item Name : {itemNames[i]}</Text>
-          <Text>Price Per Unit : {itemPricesPerUnit[i]}</Text>
-          <Text>Quantity : {itemQuantities[i]}</Text>
-          <Button
-            title="remove"
+        <Button
+            title="Add"
             onPress={() => {
-              const itemToRemove = JSON.parse(JSON.stringify(item)) // deep copy
-              const newItems = allItems.filter((currentItem) => {
-                // if all values are the same - don't want this item
-                // this would delete all items with all similar values
-                // ideally would use id's but using this check for simplification
-                if (currentItem.itemName === itemToRemove.itemName
-                  && currentItem.quantity === itemToRemove.quantity
-                  && currentItem.pricePerUnit === itemToRemove.pricePerUnit) {
-                  return false
-                }
-                return true
-              })
+              const itemToAdd = {
+                itemName: itemName,
+                pricePerUnit: pricePerUnit,
+                quantity: quantity,
+              }
+
+              const newItems = allItems.slice()
+              newItems.push(itemToAdd)
               setAllItems(newItems) // updating this value in state will call calculateTotal bc of useEffect
+
               // save to db - only change items, rest should remain the same
               updateFirestoreData(newItems, savedDiscountPercentage, savedTaxPercentage);
+
+              setItemName('')
+              setPricePerUnit('')
+              setQuantity('')
             }}
-          >
-            Remove
-                    </Button>
-        </View>)
-      })}
+        />
 
-      <View style={{ height: 10 }}></View>
+        <View style={{ height: 10 }}></View>
+        <Text style={{ fontWeight: 'bold' }}>Apply Tax Percentage: </Text>
+        <TextInput
+            style={styles.inputBox}
+            onChange={(e) => setNewTaxPercentage(e.nativeEvent.text)} value={newTaxPercentage} />
 
-      <Text>Subtotal: {subtotal} </Text>
-      <Text>Currently applied tax percentage: {savedTaxPercentage} </Text>
-      <Text>Currently applied discount percentage: {savedDiscountPercentage} </Text>
-      <Text style={{ fontWeight: 'bold' }}>Total: {total} </Text>
-      <StatusBar style="auto" />
-    </View>
+        <Button
+            title="Apply"
+            onPress={() => {
+              setSavedTaxPercentage(newTaxPercentage) // updating this value in state will call calculateTotal bc of useEffect
+              updateFirestoreData(allItems, savedDiscountPercentage, newTaxPercentage);
+              setNewTaxPercentage('')
+            }}
+        />
+
+        <View style={{ height: 10 }}></View>
+        <Text style={{ fontWeight: 'bold' }}>Apply Discount Percentage: </Text>
+        <TextInput
+            style={styles.inputBox}
+            // onChange={(e) => setNewDiscountPercentage(e.target.value)} value={newDiscountPercentage}
+            onChange={(e) => setNewDiscountPercentage(e.nativeEvent.text)} value={newDiscountPercentage}
+        />
+        <Button
+            title="Apply"
+            onPress={() => {
+              setSavedDiscountPercentage(newDiscountPercentage)// updating this value in state will call calculateTotal bc of useEffect
+              updateFirestoreData(allItems, newDiscountPercentage, savedTaxPercentage);
+              setNewDiscountPercentage('')
+            }}
+        />
+
+        <View style={{ height:10 }}></View>
+        <Text style={{ fontWeight: 'bold' }}>All Items</Text>
+        {allItems.map((item, i) => {
+          return (<View key={i}>
+            <Text>Item Name : {itemNames[i]}</Text>
+            <Text>Price Per Unit : {itemPricesPerUnit[i]}</Text>
+            <Text>Quantity : {itemQuantities[i]}</Text>
+            <Button
+                title="remove"
+                onPress={() => {
+                  const itemToRemove = JSON.parse(JSON.stringify(item)) // deep copy
+                  const newItems = allItems.filter((currentItem) => {
+                    // if all values are the same - don't want this item
+                    // this would delete all items with all similar values
+                    // ideally would use id's but using this check for simplification
+                    if (currentItem.itemName === itemToRemove.itemName
+                        && currentItem.quantity === itemToRemove.quantity
+                        && currentItem.pricePerUnit === itemToRemove.pricePerUnit) {
+                      return false
+                    }
+                    return true
+                  })
+                  setAllItems(newItems) // updating this value in state will call calculateTotal bc of useEffect
+                  // save to db - only change items, rest should remain the same
+                  updateFirestoreData(newItems, savedDiscountPercentage, savedTaxPercentage);
+                }}
+            >
+              Remove
+            </Button>
+          </View>)
+        })}
+
+        <View style={{ height: 10 }}></View>
+
+        <Text>Subtotal: {subtotal} </Text>
+        <Text>Currently applied tax percentage: {savedTaxPercentage} </Text>
+        <Text>Currently applied discount percentage: {savedDiscountPercentage} </Text>
+        <Text style={{ fontWeight: 'bold' }}>Total: {total} </Text>
+        <StatusBar style="auto" />
+      </View>
+    </ScrollView>
   );
 }
 
@@ -215,5 +207,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: 30,
+    paddingBottom: 20,
   },
+  inputBox: {
+    height: 20,
+    width: 100,
+    borderColor: 'gray',
+    borderWidth: 1
+  }
 });
