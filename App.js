@@ -90,18 +90,18 @@ export default function App() {
       <Text>Item Name:</Text>
       <TextInput
         style={{ height: 20, borderColor: 'gray', borderWidth: 1 }}
-        onChange={(e) => setItemName(e.target.value)} value={itemName}
+        onChange={(e) => setItemName(e.nativeEvent.text)} value={itemName}
       />
 
       <Text>Price Per Unit:</Text>
       <TextInput
         style={{ height: 20, borderColor: 'gray', borderWidth: 1 }}
-        onChange={(e) => setPricePerUnit(e.target.value)} value={pricePerUnit} />
+        onChange={(e) => setPricePerUnit(e.nativeEvent.text)} value={pricePerUnit} />
 
       <Text>Quantity:</Text>
       <TextInput
         style={{ height: 20, borderColor: 'gray', borderWidth: 1 }}
-        onChange={(e) => setQuantity(e.target.value)} value={quantity} />
+        onChange={(e) => setQuantity(e.nativeEvent.text)} value={quantity} />
 
       <Button
         title="Add"
@@ -129,7 +129,7 @@ export default function App() {
       <Text style={{ fontWeight: 'bold' }}>Apply Tax Percentage: </Text>
       <TextInput
         style={{ height: 20, borderColor: 'gray', borderWidth: 1 }}
-        onChange={(e) => setNewTaxPercentage(e.target.value)} value={newTaxPercentage} />
+        onChange={(e) => setNewTaxPercentage(e.nativeEvent.text)} value={newTaxPercentage} />
 
       <Button
         title="Apply"
@@ -149,18 +149,19 @@ export default function App() {
       <Text style={{ fontWeight: 'bold' }}>Apply Discount Percentage: </Text>
       <TextInput
         style={{ height: 20, borderColor: 'gray', borderWidth: 1 }}
-        onChange={(e) => setNewDiscountPercentage(e.target.value)} value={newDiscountPercentage} />
-
+        // onChange={(e) => setNewDiscountPercentage(e.target.value)} value={newDiscountPercentage}
+        onChange={(e) => setNewDiscountPercentage(e.nativeEvent.text)} value={newDiscountPercentage}
+      />
       <Button
         title="Apply"
         onPress={() => {
           // const newTaxValue = 10;
           // setSavedTaxPercentage(newTaxValue);
           // updateFirestoreData(allItems, savedDiscountPercentage, newTaxValue);
-          setSavedDiscountPercentage(newDiscountPercentage)// updating this value in state will call calculateTotal bc of useEffect 
+          setSavedDiscountPercentage(newDiscountPercentage)// updating this value in state will call calculateTotal bc of useEffect
           // save to db - only change discount, rest should remain the same
           updateFirestoreData(allItems, newDiscountPercentage, savedTaxPercentage);
-          // reset input value 
+          // reset input value
           setNewDiscountPercentage('')
         }}
       />
@@ -175,7 +176,7 @@ export default function App() {
           <Button
             title="remove"
             onPress={() => {
-              const itemToRemove = JSON.parse(JSON.stringify(item)) // deep copy 
+              const itemToRemove = JSON.parse(JSON.stringify(item)) // deep copy
               const newItems = allItems.filter((currentItem) => {
                 // if all values are the same - don't want this item
                 // this would delete all items with all similar values
