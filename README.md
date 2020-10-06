@@ -23,6 +23,11 @@ username: shiseru-fernandapalaci
 
 pass: wzDApA@teYj9bi9
 
+# 4. Auto deployment instructions
+We use github actions to auto deploy.
+The main yml file which github actions use is at `./.github/workflows/publish_app.yml`
+When code is pushed to master branch, it runs test specified in publish_app.yml and deployed to expo.
+
 # For teammate - (Local Development)
 ## 0. Clone repo and goto repo's root path.
 
