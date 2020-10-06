@@ -30,9 +30,10 @@ pass: wzDApA@teYj9bi9
 npm install --global expo-cli
 
 ## 2.  use node version 12. install dependencies and packages.
-nvm use 12
+`nvm use 12`
 
-npm i
+`npm install`
+
 
 ## 3. run repo locally
 expo start
