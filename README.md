@@ -28,7 +28,7 @@ We use github actions to auto deploy.
 The main yml file which github actions use is at `./.github/workflows/publish_app.yml`
 When code is pushed to master branch or the sub branch is pull requested to master, it runs CI/CD which runs test and deployes to expo.
 
-To reproduce - add one empty line in README.md and push to master, then; click 'action' tab and you can see the CI/CD working.`Currently, due to reach of maximum github actions use limits, it is not working. Once, prof fixes the limit, CI/CD will work properly again`
+To reproduce - add one empty line in README.md and push to master, then; click 'Actions' tab and you can see the CI/CD working.`Currently, due to reach of maximum github actions use limits, it is not working. Once, prof fixes the limit, CI/CD will work properly again`
 
 # For teammate - (Local Development)
 ## 0. Clone repo and goto repo's root path.
