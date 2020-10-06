@@ -9,7 +9,7 @@ https://drive.google.com/file/d/1doWIvzuCasVopuPU_GO1wUqegK0lhN2p/view?usp=shari
 # 3. Link to deployed application
 https://expo.io/@shiseru-fernandapalaci/checkout-price-calculator-mobile
 
-1. click url above url
+1. click above url
 
 2. click 'Open project in the browser' - (You may need to wait 30 seconds to run app simulator)
 
