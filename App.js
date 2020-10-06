@@ -196,6 +196,20 @@ export default function App() {
         <Text>Currently applied discount percentage: {savedDiscountPercentage} </Text>
         <Text style={{ fontWeight: 'bold' }}>Total: {total} </Text>
         <StatusBar style="auto" />
+        <Button
+            title="reset all data"
+            onPress={() => {
+              const newDiscountPercentage = 0;
+              const newTaxPercentage = 0;
+              const newAllItems = [];
+
+              setSavedTaxPercentage(newTaxPercentage);
+              setSavedDiscountPercentage(newDiscountPercentage);
+              setAllItems(newAllItems);
+
+              updateFirestoreData(newAllItems, newDiscountPercentage, newTaxPercentage);
+            }}
+        />
       </View>
     </ScrollView>
   );
