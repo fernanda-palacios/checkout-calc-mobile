@@ -30,17 +30,24 @@ When code is pushed to master branch or the sub branch is pull requested to mast
 
 To reproduce - add one empty line in README.md and push to master, then; click 'Actions' tab and you can see the CI/CD working.`Currently, due to reach of maximum github actions use limits, it is not working. Once, prof fixes the limit, CI/CD will work properly again.`
 
+# 5. Manual Deployment
+`I recommend to deply app with CI/CD at section 4. Auto deployment instructions`
+
+To deploy app manually, you need a local setup. 
+
+Please follow the `For teammate - (Local Development)` section 0, 1, 2 
+
+Then run `expo publish`
+
+
 # For teammate - (Local Development)
 ## 0. Clone repo and goto repo's root path.
 
 ## 1. install expo cli for react native tools.
-npm install --global expo-cli
+`npm install --global expo-cli`
 
-## 2.  use node version 12. install dependencies and packages.
-`nvm use 12`
-
-`npm install`
-
+## 2.  run expo install to install add dependencies.
+`expo install`
 
 ## 3. run repo locally
 expo start
