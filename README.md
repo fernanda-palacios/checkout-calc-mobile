@@ -21,7 +21,7 @@ https://expo.io/@shiseru-fernandapalaci/checkout-price-calculator-mobile
 
 1. click url above url
 
-2. click 'Open project in the browser' 
+2. click 'Open project in the browser' - (You may need to wait 30 seconds to run app simulator)
 
 For more details, please check "How to access and use application" section.
 
