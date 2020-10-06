@@ -58,6 +58,6 @@ Then it will successfully be published to https://expo.io/@shiseru-fernandapalac
 `expo install`
 
 ## 3. run repo locally
-expo start
+`expo start`
 
 ## 4. once the window pops out, choose the emulator you would run code with (IOS, Android)
