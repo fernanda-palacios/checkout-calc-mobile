@@ -56,7 +56,7 @@ Then it will successfully be published to https://expo.io/@shiseru-fernandapalac
 ## 1. install expo cli for react native tools.
 `npm install --global expo-cli`
 
-## 2.  run expo install to install add dependencies.
+## 2.  run expo install to add dependencies.
 `expo install`
 
 ## 3. run repo locally
