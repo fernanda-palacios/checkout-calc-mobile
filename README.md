@@ -20,8 +20,10 @@ https://drive.google.com/file/d/1doWIvzuCasVopuPU_GO1wUqegK0lhN2p/view?usp=shari
 https://expo.io/@shiseru-fernandapalaci/checkout-price-calculator-mobile
 
 * you may need login ID and password to run deployed app. In that case, please use following to login expo.
-expo account https://expo.io/dashboard/shiseru-fernandapalaci
+expo account: https://expo.io/dashboard/shiseru-fernandapalaci
+
 username: shiseru-fernandapalaci
+
 pass: wzDApA@teYj9bi9
 
 # For teammate - (Local Development)
