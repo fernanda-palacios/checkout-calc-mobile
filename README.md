@@ -50,7 +50,7 @@ pass: wzDApA@teYj9bi9
 Then it will successfully be published to https://expo.io/@shiseru-fernandapalaci/checkout-price-calculator-mobile
 
 
-# For teammate - (Local Development)
+# For teammates - (Local Development)
 ## 0. Clone repo and goto repo's root path.
 
 ## 1. install expo cli for react native tools.
