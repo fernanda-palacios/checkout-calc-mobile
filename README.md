@@ -1,4 +1,4 @@
-`Web App link: https://github.com/csc301-fall-2020/assignment-1-33-fernandapalaci-shiseru-web`
+`Web App link: `https://github.com/csc301-fall-2020/assignment-1-33-fernandapalaci-shiseru-web
 
 # 1. A1 report
 https://drive.google.com/file/d/1doWIvzuCasVopuPU_GO1wUqegK0lhN2p/view?usp=sharing
