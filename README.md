@@ -8,7 +8,23 @@ The deployed App can be vied by
 
 
 Please clone the project and do folloing commands to run repository locally.
+# 1. A1 report
+https://drive.google.com/file/d/1doWIvzuCasVopuPU_GO1wUqegK0lhN2p/view?usp=sharing
 
+# 2. How to access and use application
+1: How to access:
+
+2: How to use:
+
+# 3. Link to deployed application
+https://expo.io/@shiseru-fernandapalaci/checkout-price-calculator-mobile
+
+* you may need login ID and password to run deployed app. In that case, please use following to login expo.
+expo account https://expo.io/dashboard/shiseru-fernandapalaci
+username: shiseru-fernandapalaci
+pass: wzDApA@teYj9bi9
+
+# For teammate - (Local Development)
 # 0. Clone repo and goto repo's root path.
 
 # 1. install expo cli for react native tools.
