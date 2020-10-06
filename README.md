@@ -39,6 +39,14 @@ Please follow the `For teammate - (Local Development)` section 0, 1, 2
 
 Then run `expo publish`
 
+You will be asked to input username and password for expo accout. Please input following.
+
+username: shiseru-fernandapalaci
+
+pass: wzDApA@teYj9bi9
+
+Then it will successfully be published to https://expo.io/@shiseru-fernandapalaci/checkout-price-calculator-mobile
+
 
 # For teammate - (Local Development)
 ## 0. Clone repo and goto repo's root path.
