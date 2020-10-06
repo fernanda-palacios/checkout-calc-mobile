@@ -1,13 +1,3 @@
-# assignment-1-33-fernandapalaci-shiseru-mobile
-
-The React Native App is created with Expo.
-The deployed App can be vied by
-1. click url: https://expo.io/@shiseru-fernandapalaci/checkout-price-calculator-mobile
-2. click 'Open project in the browser' 
-
-
-
-Please clone the project and do folloing commands to run repository locally.
 # 1. A1 report
 https://drive.google.com/file/d/1doWIvzuCasVopuPU_GO1wUqegK0lhN2p/view?usp=sharing
 
