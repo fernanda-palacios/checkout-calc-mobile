@@ -2,9 +2,9 @@
 https://drive.google.com/file/d/1doWIvzuCasVopuPU_GO1wUqegK0lhN2p/view?usp=sharing
 
 # 2. How to access and use application
-1: How to access:
+1: How to access:https://drive.google.com/file/d/1SypqjD0RMZkRcHi6AIGDmGsYVmx_LnRL/view?usp=sharing
 
-2: How to use:
+2: How to use:https://drive.google.com/file/d/1FU3ay-FcdzODFwsQ1LdOZY0gbYQWtA0K/view?usp=sharing
 
 # 3. Link to deployed application
 https://expo.io/@shiseru-fernandapalaci/checkout-price-calculator-mobile
