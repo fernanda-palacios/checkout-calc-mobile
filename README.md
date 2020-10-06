@@ -28,17 +28,17 @@ username: shiseru-fernandapalaci
 pass: wzDApA@teYj9bi9
 
 # For teammate - (Local Development)
-# 0. Clone repo and goto repo's root path.
+## 0. Clone repo and goto repo's root path.
 
-# 1. install expo cli for react native tools.
+## 1. install expo cli for react native tools.
 npm install --global expo-cli
 
-# 2.  use node version 12. install dependencies and packages.
+## 2.  use node version 12. install dependencies and packages.
 nvm use 12
 
 npm i
 
-# 3. run repo locally
+## 3. run repo locally
 expo start
 
-# 4. once the window pops out, choose the emulator you would run code with (IOS, Android)
+## 4. once the window pops out, choose the emulator you would run code with (IOS, Android)
